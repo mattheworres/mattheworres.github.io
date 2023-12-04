@@ -227,7 +227,7 @@
               </li>
             </ul>
             <hr class="small" />
-            <p class="text-muted">Copyright &copy; Matthew Orres 2023</p>
+            <p class="text-muted">Copyright &copy; Matthew Orres 2016&mdash;<span id="currentYear">2023</span></p>
             <p class="text-muted">Much love and thanks to <a href="http://deathtothestockphoto.com/">Death to the Stock Photo</a> for the incredible layout and awesome stock photos every month. You guys rock!</p>
           </div>
         </div>
@@ -243,6 +243,10 @@
 
     <!-- Custom Theme JavaScript -->
     <script>
+      var currentYear = new Date().getFullYear();
+      if (currentYear > 2022) {
+        $("#currentYear").text(currentYear);
+      }
       // Closes the sidebar menu
       $("#menu-close").click(function(e) {
         e.preventDefault();
