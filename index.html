@@ -29,7 +29,7 @@
 
   <body>
     <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <button id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></button>
     <nav id="sidebar-wrapper">
       <ul class="sidebar-nav">
         <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
@@ -57,7 +57,7 @@
         <h1>Matthew Orres</h1>
         <h3>Husband, father, software developer</h3>
         <br />
-        <a href="#about" class="btn btn-dark btn-lg">Who is this guy?</a>
+        <button onclick="location.href='#about';" class="btn btn-dark btn-lg">Learn about Matthew</button>
       </div>
     </header>
 
@@ -66,12 +66,13 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-3 col-xs-12 text-center">
-            <img src="img/mo_pittsburgh.png" alt="Matthew Orres" class="img-rounded" />
+            <img src="img/mo_pittsburgh.png" alt="Matthew Orres, profile photo" class="img-rounded" />
           </div>
           <div class="col-lg-9 col-xs-12 text-center">
-            <h2>I'm a web developer who loves to make truly great software.</h2>
-            <p class="lead">Apps should fit into peoples lives, not the other way around.</p>
-            <p class="lead">Developers have a big role to play in helping make that a reality. Let me show you how I do my part!</p>
+            <h2>I'm a software developer who loves to make truly great software.</h2>
+            <p class="lead">I've been a software developer professionally for 14+ years. I'm not dedicated to developing software for frameworks, or tech stacks. I make software for <em>real people!</em></p>
+            <p class="lead">Working with my team (engineers, product owners, designers, QA engineers) and by effectively listening to users, I've shipped countless impactful features and fixes for users over the years.</p>
+            <p class="lead"><strong>I have 14+ years of meaningful and impactful experience, but I'm just getting started </strong></p>
           </div>
         </div>
         <!-- /.row -->
@@ -95,9 +96,9 @@
                     <i class="fa fa-cloud fa-stack-1x text-primary"></i>
                   </span>
                   <h4>
-                    <strong>C# &amp; PHP</strong>
+                    <strong>JS, C# &amp; PHP</strong>
                   </h4>
-                  <p>Servers need to do powerful things, and I can make them do those things on a bunch of different platforms. .NET and PHP cover the vast majority of what's in use by real companies, and I know how to do both of them the right way.</p>
+                  <p>Servers need to do powerful things, and I can make them do those things on a bunch of different platforms. JavaScript, .NET and PHP cover the vast majority of what's in use by real companies, and I know how to do both of them the right way.</p>
                 </div>
               </div>
               <div class="col-md-3 col-sm-6">
@@ -107,9 +108,9 @@
                     <i class="fa fa-building-o fa-stack-1x text-primary"></i>
                   </span>
                   <h4>
-                    <strong>Frontend Frameworks</strong>
+                    <strong>Frameworks & Libraries</strong>
                   </h4>
-                  <p>React, NodeJS. Web applications are no longer single page affairs, and have powerful frameworks to help do a lot of that work. Why re-invent wheels when you're inventing the next Tesla? Frameworks help make that a reality.</p>
+                  <p>React, Redux, NodeJS. Web applications are no longer single page affairs, and have powerful frameworks to help do a lot of that work. Why re-invent wheels when you're inventing the next big thing? Frameworks and libraries can help make that a reality.</p>
                 </div>
               </div>
               <div class="col-md-3 col-sm-6">
@@ -121,7 +122,7 @@
                   <h4>
                     <strong>Communication</strong>
                   </h4>
-                  <p>Ideas are created by people, and are shared with other people. High bandwidth communication and maximizing processes around information storage and maintenance is a must for any team OR individual.</p>
+                  <p>Ideas are created by people, and are shared with other people. High bandwidth communication and maximizing processes around information sharing is a must for any team AND individual.</p>
                 </div>
               </div>
               <div class="col-md-3 col-sm-6">
@@ -161,36 +162,58 @@
           <div class="col-lg-10 col-lg-offset-1 text-center">
             <h2>My Work</h2>
             <hr class="small">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="portfolio-item">
-                  <a href="#">
-                    <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
-                  </a>
+            <div class="row item row-visible item-1" data-index="1">
+                <div class="col-md-12">
+                    <img class="img-portfolio img-responsive" src="img/hootdraft.png" alt="Hoot Draft: Offline Fantasy drafting tool">
+                    <h3 class="project-header">Hoot Draft</h3>
+                    <p class="project-desc">
+                        Hoot Draft (formerly PHP Draft) is an open source app written with SAAS deployment in mind that helps Fantasy Sports
+                        leagues run "offline" drafts (off-platform from the service they use in-season) in a "presenter" style mode.
+                    </p>
+                    <p class="project-desc">
+                        Sign up for a commissioner account at <a href="https://www.hootdraft.com" target="_blank">hootdraft.com</a> or <a href="https://github.com/mattheworres/hootdraft" target="_blank">check out the source code</a>!
+                    </p>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="portfolio-item">
-                  <a href="#">
-                    <img class="img-portfolio img-responsive" src="img/portfolio-2.jpg">
-                  </a>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="portfolio-item">
-                  <a href="#">
-                    <img class="img-portfolio img-responsive" src="img/portfolio-3.jpg">
-                  </a>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="portfolio-item">
-                  <a href="#">
-                    <img class="img-portfolio img-responsive" src="img/portfolio-4.jpg">
-                  </a>
-                </div>
-              </div>
             </div>
+            <div class="row item row-hidden item-2" data-index="2">
+                <div class="col-md-12">
+                    <img class="img-portfolio img-responsive" src="img/comparehare.png"
+                        alt="Hoot Draft: Offline Fantasy drafting tool">
+                    <h3 class="project-header">CompareHare</h3>
+                    <p class="project-desc">
+                        CompareHare is a (unreleased) price comparison and alert app that periodically gathers the latest pricing data on
+                        products or services the user indicated preferences for, and automatically notifies them of what they consider a good
+                        deal.
+                    </p>
+                    <p class="project-desc">
+                        Originally written for electric and gas utility prices, it was expanded to also include retail items like large home
+                        appliances in 2022.
+                    </p>
+                    <p class="project-desc">
+                        Source is private, but I would be happy to discuss a variety of details about this project with you!
+                    </p>
+                </div>
+            </div>
+            <div class="row item row-hidden item-3" data-index="3">
+                <div class="col-md-12">
+                    <img class="img-portfolio img-responsive" src="img/server.png"
+                        alt="Hoot Draft: Offline Fantasy drafting tool">
+                    <h3 class="project-header">Home Lab</h3>
+                    <p class="project-desc">
+                        Not just one project, but several! My home lab enables me to quickly and easily spin up new instances of any technology
+                        stack I'd like to tinker with or use regularly.
+                    </p>
+                    <p class="project-desc">
+                        The current server runs on Unraid, and deploys a variety of Docker containers, including Jenkins for CI, Nginx for web
+                        serving, and any other containers I choose to spin up to run software (MariaDB, .NET hosting, and more!).
+                    </p>
+                    <p class="project-desc">
+                        The entire instance is private and secure, but I will gladly discuss any element of this project and how it pertains to
+                        me as a software developer!
+                    </p>
+                </div>
+            </div>
+            <button class="next-button btn btn-dark btn-lg">Next project<i class="fa fa-chevron-right fa-fw fa-1x"></i></button>
           </div>
         </div>
       </div>
@@ -201,7 +224,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h3>I appreciate your interest to learn more about me and my craft!</h3>
+            <h3>I appreciate your interest to learn more about me and my work!</h3>
             <p>I am actively looking for new opportunities, so please reach out using my contact information below. Thanks!</p>
           </div>
         </div>
@@ -214,25 +237,28 @@
         <div class="row">
           <div class="col-lg-10 col-lg-offset-1 text-center">
             <h4><strong>Matthew Orres</strong></h4>
-            <ul class="list-unstyled">
-              <li><a href="mailto:matthew.orres+isthisspam@gmail.com">matthew.orres@gmail.com</a></li>
-            </ul>
             <br />
             <ul class="list-inline">
+              <li>
+                <a href="mailto:matthew.orres+isthisspam@gmail.com"><i class="fa fa-envelope fa-fw fa-3x"></i></a>
+              </li>
               <li>
                 <a href="https://github.com/mattheworres" target="_blank"><i class="fa fa-github fa-fw fa-3x"></i></a>
               </li>
               <li>
-              <a href="https://www.linkedin.com/in/matthew-orres-8a86a41a" target="_blank"><i class="fa fa-linkedin fa-fw fa-3x"></i></a>
+                <a rel="me" href="https://fosstodon.org/@mattygabe" target="_blank"><i class="fa fa-at fa-fw fa-3x"></i></a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/matthew-orres-8a86a41a" target="_blank"><i class="fa fa-linkedin fa-fw fa-3x"></i></a>
               </li>
             </ul>
             <hr class="small" />
-            <p class="text-muted">Copyright &copy; Matthew Orres 2016&mdash;<span id="currentYear">2023</span></p>
-            <p class="text-muted">Much love and thanks to <a href="http://deathtothestockphoto.com/">Death to the Stock Photo</a> for the incredible layout and awesome stock photos every month. You guys rock!</p>
+            <p>Copyright &copy; Matthew Orres 2016&mdash;<span id="currentYear">2024</span></p>
+            <p>Much love and thanks to <a href="http://deathtothestockphoto.com/">Death to the Stock Photo</a> for the incredible layout and awesome stock photos every month. You guys rock!</p>
           </div>
         </div>
       </div>
-      <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+      <button id="to-top" href="#top" onclick="location.href='#top';" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></button>
     </footer>
 
     <!-- jQuery -->
@@ -244,9 +270,24 @@
     <!-- Custom Theme JavaScript -->
     <script>
       var currentYear = new Date().getFullYear();
-      if (currentYear > 2022) {
+      if (currentYear > 2023) {
         $("#currentYear").text(currentYear);
       }
+
+      $('button.next-button').click(function(e) {
+        var currentElement = $('.row.row-visible'),
+            currentIndex = parseInt(currentElement.data('index'), 10),
+            visibleClass = 'row-visible',
+            hiddenClass = 'row-hidden';
+
+        var nextIndex = currentIndex === 3 ? 1 : currentIndex + 1;
+        var nextElement = $('.row.item-' + nextIndex);
+
+        currentElement.addClass(hiddenClass).removeClass(visibleClass);
+        nextElement.addClass(visibleClass).removeClass(hiddenClass);
+      });
+
+
       // Closes the sidebar menu
       $("#menu-close").click(function(e) {
         e.preventDefault();
