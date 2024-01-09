@@ -287,6 +287,10 @@ div.row.row-hidden {
 
 p.project-desc {
     font-size: 16px;
+    max-width: 600px;
+    margin: auto;
+    margin-bottom: 10px;
+    text-align: left;
 }
 
 div.row.item {
