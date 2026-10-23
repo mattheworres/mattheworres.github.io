@@ -23,6 +23,11 @@ export function initCarousel(root, hoverZone) {
   const count = root.querySelector('.carousel__count');
   const progressFill = root.querySelector('.carousel__progress span');
 
+  const countPosition = document.createTextNode('');
+  const countName = document.createElement('span');
+  countName.className = 'visually-hidden';
+  count.replaceChildren(countPosition, countName);
+
   const slides = [...track.children];
   const total = slides.length;
   slides.forEach((slide, i) => {
@@ -33,7 +38,6 @@ export function initCarousel(root, hoverZone) {
   // Auto-rotation runs unless one of these says otherwise. Someone who asked their OS for
   // reduced motion starts paused and can still opt in with the play button.
   let userPaused = reducedMotion.matches;
-  let userChose = false; // pressed the play/pause button, so the OS setting no longer decides
   let hovering = false;
   let keyboardFocus = false;
   let busy = false;
@@ -99,10 +103,11 @@ export function initCarousel(root, hoverZone) {
 
     // The count is the live region, so it also carries the skill's name for screen readers.
     const current = track.firstElementChild;
-    const name = document.createElement('span');
-    name.className = 'visually-hidden';
-    name.textContent = `, ${current.querySelector('h3')?.textContent ?? ''}`;
-    count.replaceChildren(`${current.dataset.index} / ${total}`, name);
+    const position = `${current.dataset.index} / ${total}`;
+    const name = `, ${current.querySelector('h3')?.textContent ?? ''}`;
+    // Only touch the live region when the slide actually changed, so nothing is re-announced.
+    if (countPosition.data !== position) countPosition.data = position;
+    if (countName.textContent !== name) countName.textContent = name;
   }
 
   function canAutoRotate() {
@@ -140,7 +145,6 @@ export function initCarousel(root, hoverZone) {
   next.addEventListener('click', () => go(1));
   toggle.addEventListener('click', () => {
     userPaused = !userPaused;
-    userChose = true;
     // Pressing Play is explicit: it overrides the hover/focus pauses that were in effect when
     // the button was pressed (they only re-apply on the next pointerenter / focusin).
     if (!userPaused) hovering = keyboardFocus = false;
@@ -148,7 +152,8 @@ export function initCarousel(root, hoverZone) {
     schedule();
   });
   reducedMotion.addEventListener('change', () => {
-    if (!userChose) userPaused = reducedMotion.matches;
+    // Changing the OS setting is the newer signal, so it wins over an earlier button press.
+    userPaused = reducedMotion.matches;
     renderToggle();
     schedule();
   });

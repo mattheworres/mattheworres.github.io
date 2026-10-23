@@ -51,7 +51,10 @@ function initActiveNav() {
   const update = () => {
     const probe = window.innerHeight * 0.4;
     const pageEnd = document.documentElement.scrollHeight - 2;
-    const atBottom = window.scrollY + window.innerHeight >= pageEnd;
+    // A page that fits the viewport is never "at the bottom": it would mark the last link
+    // while the title is showing.
+    const scrollable = pageEnd > window.innerHeight;
+    const atBottom = scrollable && window.scrollY + window.innerHeight >= pageEnd;
     const current = atBottom
       ? links[links.length - 1]
       : links.find(({ section }) => {
@@ -68,7 +71,25 @@ function initActiveNav() {
   const onScroll = perFrame(update);
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
+  // Layout shifts without scrolling (carousel sizing itself, web fonts arriving, a restored
+  // scroll position) move the sections too.
+  new ResizeObserver(onScroll).observe(document.body);
+  document.fonts?.ready.then(onScroll);
   update();
+}
+
+/** Space activates the "back to top" link like it would a button (links only take Enter). */
+function initToTop() {
+  const toTop = document.querySelector('.to-top');
+  if (!toTop) return;
+
+  // Like a native button: keydown only stops the page scrolling, the press happens on keyup.
+  toTop.addEventListener('keydown', (e) => {
+    if (e.key === ' ') e.preventDefault();
+  });
+  toTop.addEventListener('keyup', (e) => {
+    if (e.key === ' ') toTop.click();
+  });
 }
 
 // Each piece is set up independently: a failure in one (or in the dynamically loaded carousel)
@@ -80,7 +101,7 @@ if (skillsCarousel) {
     .catch((error) => console.error('Carousel unavailable', error));
 }
 
-for (const init of [setYear, initScrollFallback, initActiveNav]) {
+for (const init of [setYear, initScrollFallback, initActiveNav, initToTop]) {
   try {
     init();
   } catch (error) {

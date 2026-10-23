@@ -836,9 +836,11 @@
     animation-fill-mode: both;
   }
 
-  /* A focused link must be seen, even at the top of the page. (!important beats animations.) */
+  /* A focused link must be seen, and the visible band clickable, even at the top of the page.
+     (!important beats animations.) */
   .band:focus-within {
     opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
   @supports (animation-timeline: scroll()) {
@@ -860,9 +862,13 @@
     }
 
     /* Nothing drives the animations until js/main.js sets --scroll-p (it adds .scroll-fallback).
-       Without it: the bar is simply there and the back-to-top button is not. */
+       Without it: the bar is simply there (stuck to the top, above the title slide rather than
+       over it) and the back-to-top button is not. */
     :root:not(.scroll-fallback) :is(.band, .title__inner) {
       animation: none;
+    }
+    :root:not(.scroll-fallback) .band {
+      position: sticky;
     }
     :root:not(.scroll-fallback) .to-top {
       animation: none;
