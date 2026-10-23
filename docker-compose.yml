@@ -1,0 +1,16 @@
+# Local preview: `docker compose up`, then open http://localhost:8080
+# Serves the repo as-is (bind mount), so edits show up on refresh.
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/usr/share/nginx/html:ro
+    # Print the URL, then hand off to the image's normal entrypoint.
+    command:
+      - sh
+      - -c
+      - |
+        echo "Serving /usr/share/nginx/html at http://localhost:8080"
+        exec /docker-entrypoint.sh nginx -g "daemon off;"
