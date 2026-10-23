@@ -4,7 +4,8 @@
 const AUTO_ROTATE_MS = 10_000;
 const SLIDE_MS = 450;
 
-// Auto-rotation and the play/pause button only exist at this width and up (matches the CSS).
+// Auto-rotation and the play/pause button only exist at this width and up. This is the same
+// breakpoint the CSS uses for the desktop carousel layout (keep the two in sync).
 const desktop = matchMedia('(min-width: 60rem)');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -32,6 +33,7 @@ export function initCarousel(root, hoverZone) {
   // Auto-rotation runs unless one of these says otherwise. Someone who asked their OS for
   // reduced motion starts paused and can still opt in with the play button.
   let userPaused = reducedMotion.matches;
+  let userChose = false; // pressed the play/pause button, so the OS setting no longer decides
   let hovering = false;
   let keyboardFocus = false;
   let busy = false;
@@ -49,18 +51,24 @@ export function initCarousel(root, hoverZone) {
     // The viewport is as tall as the card on screen, so each card keeps its own height.
     const incoming = direction > 0 ? track.children[1] : track.lastElementChild;
     const heights = [`${viewport.offsetHeight}px`, `${incoming.offsetHeight}px`];
-    const options = { duration: reducedMotion.matches ? 0 : SLIDE_MS, easing: 'ease', fill: 'both' };
+    const options = {
+      duration: reducedMotion.matches ? 0 : SLIDE_MS,
+      easing: 'ease',
+      fill: 'both',
+    };
     const animations = [];
 
     try {
       if (direction > 0) {
-        animations.push(track.animate({ transform: ['translateX(0)', `translateX(${-width}px)`] }, options));
+        const slideLeft = { transform: ['translateX(0)', `translateX(${-width}px)`] };
+        animations.push(track.animate(slideLeft, options));
         animations.push(viewport.animate({ height: heights }, options));
         await Promise.all(animations.map((a) => a.finished));
         track.append(track.firstElementChild);
       } else {
         track.prepend(track.lastElementChild);
-        animations.push(track.animate({ transform: [`translateX(${-width}px)`, 'translateX(0)'] }, options));
+        const slideRight = { transform: [`translateX(${-width}px)`, 'translateX(0)'] };
+        animations.push(track.animate(slideRight, options));
         animations.push(viewport.animate({ height: heights }, options));
         await Promise.all(animations.map((a) => a.finished));
       }
@@ -85,8 +93,16 @@ export function initCarousel(root, hoverZone) {
   }
 
   function render() {
-    [...track.children].forEach((slide, i) => { slide.inert = i !== 0; });
-    count.textContent = `${track.firstElementChild.dataset.index} / ${total}`;
+    [...track.children].forEach((slide, i) => {
+      slide.inert = i !== 0;
+    });
+
+    // The count is the live region, so it also carries the skill's name for screen readers.
+    const current = track.firstElementChild;
+    const name = document.createElement('span');
+    name.className = 'visually-hidden';
+    name.textContent = `, ${current.querySelector('h3')?.textContent ?? ''}`;
+    count.replaceChildren(`${current.dataset.index} / ${total}`, name);
   }
 
   function canAutoRotate() {
@@ -124,6 +140,7 @@ export function initCarousel(root, hoverZone) {
   next.addEventListener('click', () => go(1));
   toggle.addEventListener('click', () => {
     userPaused = !userPaused;
+    userChose = true;
     // Pressing Play is explicit: it overrides the hover/focus pauses that were in effect when
     // the button was pressed (they only re-apply on the next pointerenter / focusin).
     if (!userPaused) hovering = keyboardFocus = false;
@@ -131,15 +148,19 @@ export function initCarousel(root, hoverZone) {
     schedule();
   });
   reducedMotion.addEventListener('change', () => {
-    userPaused = reducedMotion.matches;
+    if (!userChose) userPaused = reducedMotion.matches;
     renderToggle();
     schedule();
   });
 
   // Touch swipe. (Mouse users have the buttons.)
   let startX = null;
-  viewport.addEventListener('pointerdown', (e) => { startX = e.pointerType === 'mouse' ? null : e.clientX; });
-  viewport.addEventListener('pointercancel', () => { startX = null; });
+  viewport.addEventListener('pointerdown', (e) => {
+    startX = e.pointerType === 'mouse' ? null : e.clientX;
+  });
+  viewport.addEventListener('pointercancel', () => {
+    startX = null;
+  });
   viewport.addEventListener('pointerup', (e) => {
     if (startX === null) return;
     const delta = e.clientX - startX;
@@ -153,15 +174,26 @@ export function initCarousel(root, hoverZone) {
     hovering = true;
     schedule();
   });
-  hoverZone.addEventListener('pointerleave', () => { hovering = false; schedule(); });
-  root.addEventListener('focusin', (e) => { keyboardFocus = e.target.matches(':focus-visible'); schedule(); });
-  root.addEventListener('focusout', () => { keyboardFocus = false; schedule(); });
+  hoverZone.addEventListener('pointerleave', () => {
+    hovering = false;
+    schedule();
+  });
+  root.addEventListener('focusin', (e) => {
+    keyboardFocus = e.target.matches(':focus-visible');
+    schedule();
+  });
+  root.addEventListener('focusout', () => {
+    keyboardFocus = false;
+    schedule();
+  });
   document.addEventListener('visibilitychange', schedule);
   desktop.addEventListener('change', schedule);
 
   // Text re-wrapping (window resize, web font arriving) changes card heights.
   // (Resizes during a slide are picked up by the fitHeight() at the end of go().)
-  const resizeObserver = new ResizeObserver(() => { if (!busy) fitHeight(); });
+  const resizeObserver = new ResizeObserver(() => {
+    if (!busy) fitHeight();
+  });
   slides.forEach((slide) => resizeObserver.observe(slide));
 
   root.classList.add('is-enhanced');

@@ -2,7 +2,21 @@
 
 /** Footer year. */
 function setYear() {
-  document.getElementById('currentYear').textContent = new Date().getFullYear();
+  const year = document.getElementById('currentYear');
+  if (year) year.textContent = new Date().getFullYear();
+}
+
+/** Wrap `fn` so it runs at most once per frame, however often the event fires. */
+function perFrame(fn) {
+  let queued = false;
+  return () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      fn();
+    });
+  };
 }
 
 /**
@@ -13,51 +27,63 @@ function initScrollFallback() {
   if (CSS.supports('animation-timeline: scroll()')) return;
 
   const root = document.documentElement;
-  let queued = false;
-
   const update = () => {
-    queued = false;
     const progress = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.6)));
     root.style.setProperty('--scroll-p', progress.toFixed(4));
   };
 
-  window.addEventListener('scroll', () => {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(update);
-  }, { passive: true });
-
+  // Tells the CSS that something is driving the animations (without JS they stay off).
+  root.classList.add('scroll-fallback');
+  window.addEventListener('scroll', perFrame(update), { passive: true });
   update();
 }
 
-/** Mark the nav link for the section nearest the middle of the viewport. */
+/**
+ * Mark the nav link for the section across the upper-middle of the viewport. Nothing is marked
+ * over the title slide or the blocks between sections, and the last link wins at the page bottom.
+ */
 function initActiveNav() {
-  const links = new Map(
-    [...document.querySelectorAll('.band__links a')].map((a) => [a.hash.slice(1), a])
-  );
+  const links = [...document.querySelectorAll('.band__links a')]
+    .map((link) => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+    .filter(({ section }) => section);
+  if (!links.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      links.forEach((link) => link.removeAttribute('aria-current'));
-      links.get(entry.target.id)?.setAttribute('aria-current', 'true');
+  const update = () => {
+    const probe = window.innerHeight * 0.4;
+    const pageEnd = document.documentElement.scrollHeight - 2;
+    const atBottom = window.scrollY + window.innerHeight >= pageEnd;
+    const current = atBottom
+      ? links[links.length - 1]
+      : links.find(({ section }) => {
+          const { top, bottom } = section.getBoundingClientRect();
+          return top <= probe && bottom > probe;
+        });
+
+    for (const entry of links) {
+      if (entry === current) entry.link.setAttribute('aria-current', 'true');
+      else entry.link.removeAttribute('aria-current');
     }
-  }, { rootMargin: '-45% 0px -50% 0px' }); // a thin strip across the middle of the viewport
+  };
 
-  for (const id of links.keys()) {
-    const section = document.getElementById(id);
-    if (section) observer.observe(section);
-  }
+  const onScroll = perFrame(update);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
 }
 
-setYear();
-initScrollFallback();
-initActiveNav();
-
+// Each piece is set up independently: a failure in one (or in the dynamically loaded carousel)
+// can't stop the others.
 const skillsCarousel = document.querySelector('.carousel');
 if (skillsCarousel) {
-  // Dynamic so a failure to load the carousel can't take the rest of this script down with it.
   import('./carousel.js')
     .then(({ initCarousel }) => initCarousel(skillsCarousel, document.getElementById('skills')))
     .catch((error) => console.error('Carousel unavailable', error));
+}
+
+for (const init of [setYear, initScrollFallback, initActiveNav]) {
+  try {
+    init();
+  } catch (error) {
+    console.error(`${init.name} failed`, error);
+  }
 }

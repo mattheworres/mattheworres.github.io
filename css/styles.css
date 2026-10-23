@@ -141,6 +141,16 @@
   .skip-link:focus {
     transform: none;
   }
+
+  /* Read by screen readers, not shown. */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 }
 
 /* --------------------------------------------------------------- layout */
@@ -267,16 +277,13 @@
 
   /* Title slide ------------------------------------------------------- */
   .title {
+    position: relative;
     display: grid;
     place-items: center;
     min-height: 100svh;
     padding: 2rem var(--gutter);
-    text-align: center;
-  }
-
-  .title {
-    position: relative;
     overflow: hidden;
+    text-align: center;
   }
 
   .title__art {
@@ -386,10 +393,10 @@
   }
 
   /* Carousel (js/carousel.js) ------------------------------------------
-   * Below 1079px: full-bleed cards, back/forward buttons flank the title.
-   * 1079px and up: one centered card with the buttons on either side of it.
-   * >= 60rem also shows the pause button and progress bar (keep that breakpoint
-   * in sync with `desktop` in js/carousel.js). */
+   * Below 60rem: full-bleed cards, back/forward buttons flank the title.
+   * 60rem and up: one centered card with the buttons on either side of it, plus the
+   * pause button and progress bar (keep that breakpoint in sync with `desktop` in
+   * js/carousel.js). */
   .carousel {
     --card-width: 30rem;
     display: grid;
@@ -533,7 +540,7 @@
     display: none;
   }
 
-  @media (min-width: 1079px) {
+  @media (min-width: 60rem) {
     .carousel {
       grid-template-columns: auto var(--card-width) auto;
       grid-template-areas:
@@ -554,9 +561,6 @@
       align-self: center;
       margin-inline: 0;
     }
-  }
-
-  @media (min-width: 60rem) {
     .carousel__toggle {
       display: grid;
     }
@@ -778,15 +782,16 @@
  * same look, so there is only one definition of the visuals.
  */
 @layer motion {
-  /* Hidden (and so out of the tab order) until the first bit of scrolling. */
+  /* Transparent and click-through until the first bit of scrolling. Not visibility:hidden, so
+     keyboard users can still tab into the links (see .band:focus-within below). */
   @keyframes bar-in {
     0% {
       opacity: 0;
-      visibility: hidden;
+      pointer-events: none;
     }
     100% {
       opacity: 1;
-      visibility: visible;
+      pointer-events: auto;
     }
   }
 
@@ -831,6 +836,11 @@
     animation-fill-mode: both;
   }
 
+  /* A focused link must be seen, even at the top of the page. (!important beats animations.) */
+  .band:focus-within {
+    opacity: 1 !important;
+  }
+
   @supports (animation-timeline: scroll()) {
     .band,
     .title__inner,
@@ -847,6 +857,16 @@
       animation-duration: 1s;
       animation-play-state: paused;
       animation-delay: calc(var(--scroll-p, 0) * -1s);
+    }
+
+    /* Nothing drives the animations until js/main.js sets --scroll-p (it adds .scroll-fallback).
+       Without it: the bar is simply there and the back-to-top button is not. */
+    :root:not(.scroll-fallback) :is(.band, .title__inner) {
+      animation: none;
+    }
+    :root:not(.scroll-fallback) .to-top {
+      animation: none;
+      visibility: hidden;
     }
   }
 
@@ -872,11 +892,10 @@
     }
   }
 
-  /* No scroll animation at all: render the end state, the slim bar. */
+  /* Reduced motion: the bar and button still fade in with scrolling (no movement), but the
+     title scrolls away like any other content instead of lifting off as it fades. */
   @media (prefers-reduced-motion: reduce) {
-    .band,
-    .title__inner,
-    .to-top {
+    .title__inner {
       animation: none;
     }
   }
