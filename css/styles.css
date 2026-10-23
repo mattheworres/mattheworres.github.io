@@ -434,13 +434,30 @@
     justify-self: center;
   }
 
-  /* Without JS: a native scroll-snap row. */
+  /* Without JS: every card is shown, in a wrapping grid with a gap between them. */
+  .carousel:not(.is-enhanced) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'title'
+      'view';
+    grid-template-rows: auto;
+    width: auto;
+    max-width: 72rem;
+  }
   .carousel:not(.is-enhanced) .carousel__viewport {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    overflow: visible;
+  }
+  .carousel:not(.is-enhanced) .carousel__track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 1.5rem;
+    padding-inline: var(--gutter);
   }
   .carousel:not(.is-enhanced) .carousel__slide {
-    scroll-snap-align: center;
+    padding-inline: 0;
+  }
+  .carousel:not(.is-enhanced) .skill {
+    width: 100%;
   }
 
   .carousel__prev {
