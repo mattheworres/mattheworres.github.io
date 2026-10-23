@@ -1,372 +1,577 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Matthew Orres Online Portfolio">
-    <meta name="author" content="Matthew Orres">
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Matthew Orres</title>
+    <meta
+      name="description"
+      content="Portfolio of Matthew Orres, a Pittsburgh-area software developer."
+    />
+    <meta name="author" content="Matthew Orres" />
+    <meta name="theme-color" content="#0e0e10" />
+    <link rel="canonical" href="https://mattheworres.com/" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Matthew Orres" />
+    <meta
+      property="og:description"
+      content="Portfolio of Matthew Orres, a Pittsburgh-area software developer."
+    />
+    <meta property="og:url" content="https://mattheworres.com/" />
 
-    <!-- Custom CSS -->
-    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <link
+      rel="preload"
+      href="fonts/source-sans-3-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="module" src="js/main.js"></script>
 
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Matthew Orres",
+        "url": "https://mattheworres.com/",
+        "jobTitle": "Software Developer",
+        "sameAs": [
+          "https://github.com/mattheworres",
+          "https://www.linkedin.com/in/matthew-orres-8a86a41a"
+        ]
+      }
+    </script>
   </head>
 
   <body>
-    <!-- Navigation -->
-    <button id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></button>
-    <nav id="sidebar-wrapper">
-      <ul class="sidebar-nav">
-        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-        <li>
-          <a href="#top" onclick=$("#menu-close").click();>Home</a>
-        </li>
-        <li>
-          <a href="#about" onclick=$("#menu-close").click();>About</a>
-        </li>
-        <li>
-          <a href="#services" onclick=$("#menu-close").click();>Skills</a>
-        </li>
-        <li>
-          <a href="#portfolio" onclick=$("#menu-close").click();>Portfolio</a>
-        </li>
-        <li>
-          <a href="#contact" onclick=$("#menu-close").click();>Reach Out</a>
-        </li>
-      </ul>
-    </nav>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Header -->
-    <header id="top" class="header">
-      <div class="text-vertical-center">
-        <h1>Matthew Orres</h1>
-        <h3>Husband, father, software developer</h3>
-        <br />
-        <button onclick="location.href='#about';" class="btn btn-dark btn-lg">Learn about Matthew</button>
-      </div>
+    <!--
+      Icon sprite. Mail, cloud, building, messages and arrows are from Lucide (ISC license);
+      GitHub, LinkedIn and Mastodon are from Simple Icons (CC0). Referenced with <use href="#id">.
+    -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <symbol id="i-mail" viewBox="0 0 24 24">
+        <rect width="20" height="16" x="2" y="4" rx="2" />
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+      </symbol>
+      <symbol id="i-cloud" viewBox="0 0 24 24">
+        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+      </symbol>
+      <symbol id="i-building" viewBox="0 0 24 24">
+        <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
+        <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
+        <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" />
+        <path d="M10 6h4" />
+        <path d="M10 10h4" />
+        <path d="M10 14h4" />
+        <path d="M10 18h4" />
+      </symbol>
+      <symbol id="i-messages" viewBox="0 0 24 24">
+        <path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z" />
+        <path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1" />
+      </symbol>
+      <symbol id="i-exchange" viewBox="0 0 24 24">
+        <path d="M8 3 4 7l4 4" />
+        <path d="M4 7h16" />
+        <path d="m16 21 4-4-4-4" />
+        <path d="M20 17H4" />
+      </symbol>
+      <symbol id="i-code" viewBox="0 0 24 24">
+        <path d="m16 18 6-6-6-6" />
+        <path d="m8 6-6 6 6 6" />
+      </symbol>
+      <symbol id="i-component" viewBox="0 0 24 24">
+        <path
+          d="M15.536 11.293a1 1 0 0 0 0 1.414l2.376 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z"
+        />
+        <path
+          d="M2.297 11.293a1 1 0 0 0 0 1.414l2.377 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414L6.088 8.916a1 1 0 0 0-1.414 0z"
+        />
+        <path
+          d="M8.916 17.912a1 1 0 0 0 0 1.415l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.415l-2.377-2.376a1 1 0 0 0-1.414 0z"
+        />
+        <path
+          d="M8.916 4.674a1 1 0 0 0 0 1.414l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z"
+        />
+      </symbol>
+      <symbol id="i-server" viewBox="0 0 24 24">
+        <rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
+        <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
+        <line x1="6" x2="6.01" y1="6" y2="6" />
+        <line x1="6" x2="6.01" y1="18" y2="18" />
+      </symbol>
+      <symbol id="i-cloud-cog" viewBox="0 0 24 24">
+        <path d="m10.852 19.772-.383.924" />
+        <path d="m13.148 14.228.383-.923" />
+        <path d="M13.148 19.772a3 3 0 1 0-2.296-5.544l-.383-.923" />
+        <path d="m13.53 20.696-.382-.924a3 3 0 1 1-2.296-5.544" />
+        <path d="m14.772 15.852.923-.383" />
+        <path d="m14.772 18.148.923.383" />
+        <path d="M4.2 15.1a7 7 0 1 1 9.93-9.858A7 7 0 0 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.2" />
+        <path d="m9.228 15.852-.923-.383" />
+        <path d="m9.228 18.148-.923.383" />
+      </symbol>
+      <symbol id="i-flask-conical" viewBox="0 0 24 24">
+        <path
+          d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"
+        />
+        <path d="M6.453 15h11.094" />
+        <path d="M8.5 2h7" />
+      </symbol>
+      <symbol id="i-heart-handshake" viewBox="0 0 24 24">
+        <path
+          d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762"
+        />
+      </symbol>
+      <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24">
+        <rect x="14" y="4" width="4" height="16" rx="1" />
+        <rect x="6" y="4" width="4" height="16" rx="1" />
+      </symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3" /></symbol>
+      <symbol id="i-chevron-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6" /></symbol>
+      <symbol id="i-github" viewBox="0 0 24 24">
+        <path
+          d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+        />
+      </symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24">
+        <path
+          d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+        />
+      </symbol>
+      <symbol id="i-mastodon" viewBox="0 0 24 24">
+        <path
+          d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"
+        />
+      </symbol>
+    </svg>
+
+    <!--
+      The bar is pinned to the top of the viewport and fades in as you scroll away from the
+      title slide (see "Scroll-linked motion" in css/styles.css).
+    -->
+    <header class="band">
+      <svg
+        class="band__art"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="xMidYMin slice"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <defs>
+          <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ffd25a" />
+            <stop offset="1" stop-color="#c98f00" />
+          </linearGradient>
+          <linearGradient id="gold-fade" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#ffb612" stop-opacity="0" />
+            <stop offset="1" stop-color="#ffb612" stop-opacity=".28" />
+          </linearGradient>
+        </defs>
+        <polygon points="0,0 900,0 640,320 0,320" fill="url(#gold-fade)" />
+        <g fill="none" stroke="#ffb612" stroke-width="2">
+          <circle cx="1130" cy="-30" r="300" stroke-opacity=".16" />
+          <circle cx="1130" cy="-30" r="250" stroke-opacity=".3" />
+          <path d="M60 0 Q 340 340 620 0" stroke-opacity=".7" />
+          <path d="M140 0 Q 340 230 540 0" stroke-opacity=".4" />
+        </g>
+        <circle cx="1130" cy="-30" r="200" fill="url(#gold)" />
+        <circle cx="860" cy="100" r="26" fill="#ffb612" />
+        <circle
+          cx="140"
+          cy="210"
+          r="86"
+          fill="none"
+          stroke="#ffb612"
+          stroke-opacity=".25"
+          stroke-width="2"
+        />
+      </svg>
+
+      <nav class="band__nav" aria-label="Primary">
+        <a class="band__brand" href="#title" aria-label="Matthew Orres, back to top">
+          <span class="band__brand-full">Matthew Orres</span>
+          <span class="band__brand-short" aria-hidden="true">MO</span>
+        </a>
+        <ul class="band__links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Reach Out</a></li>
+        </ul>
+      </nav>
     </header>
 
-    <!-- About -->
-    <section id="about" class="about">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-xs-12 text-center">
-            <img src="img/mo_pittsburgh.png" alt="Matthew Orres, profile photo" class="img-rounded" />
-          </div>
-          <div class="col-lg-9 col-xs-12 text-center">
-            <h2>I'm a software developer who loves to make truly great software.</h2>
-            <p class="lead">I've been a software developer professionally for 14+ years. I'm not dedicated to developing software for frameworks, or tech stacks. I make software for <em>real people!</em></p>
-            <p class="lead">Working with my team (engineers, product owners, designers, QA engineers) and by effectively listening to users, I've shipped countless impactful features and fixes for users over the years.</p>
-            <p class="lead"><strong>I have 14+ years of meaningful and impactful experience, but I'm just getting started </strong></p>
+    <main id="main">
+      <section id="title" class="title" aria-labelledby="title-heading">
+        <!-- Dim backdrop shapes; the CSS vignette keeps the area behind the text darkest. -->
+        <svg
+          class="title__art"
+          viewBox="0 0 1440 900"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <defs>
+            <linearGradient id="gold-soft" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffb612" stop-opacity=".22" />
+              <stop offset="1" stop-color="#c98f00" stop-opacity=".05" />
+            </linearGradient>
+          </defs>
+          <polygon points="1440,200 1440,900 880,900" fill="url(#gold-soft)" />
+          <polygon points="0,420 360,900 0,900" fill="url(#gold-soft)" />
+          <circle cx="1240" cy="720" r="210" fill="url(#gold-soft)" />
+          <circle cx="200" cy="300" r="120" fill="url(#gold-soft)" />
+          <g fill="none" stroke="#ffb612" stroke-width="2">
+            <circle cx="1240" cy="720" r="290" stroke-opacity=".14" />
+            <circle cx="1240" cy="720" r="370" stroke-opacity=".09" />
+            <circle cx="200" cy="300" r="190" stroke-opacity=".12" />
+            <path d="M-40 780 Q 360 1040 760 780" stroke-opacity=".18" />
+            <path d="M600 900 Q 1000 560 1440 900" stroke-opacity=".12" />
+          </g>
+          <circle cx="330" cy="760" r="14" fill="#ffb612" fill-opacity=".25" />
+          <circle cx="1090" cy="330" r="9" fill="#ffb612" fill-opacity=".22" />
+        </svg>
+
+        <div class="title__inner">
+          <h1 id="title-heading">Matthew Orres</h1>
+          <p class="title__sub">Software developer. Husband. Father.</p>
+          <a class="button" href="#about">Learn about Matthew</a>
+        </div>
+      </section>
+
+      <section id="about" class="section about" aria-labelledby="about-heading">
+        <div class="container about__grid">
+          <img
+            class="about__photo"
+            src="img/mo_pittsburgh.webp"
+            width="250"
+            height="250"
+            alt="Matthew Orres, profile photo"
+          />
+          <div class="about__text">
+            <h2 id="about-heading">I'm a software developer who loves making great software.</h2>
+            <p class="lead">
+              I've been building software professionally for sixteen years, and I still think the
+              job is fundamentally about people. I've shipped at a services shop, at Yahoo Sports,
+              and at Fieldwire — with engineers, designers, PMs, and QA in the room, and users on my
+              mind the whole way.
+            </p>
+            <p class="lead">
+              <strong
+                >Still building for real people, still learning from the team around me.
+              </strong>
+            </p>
           </div>
         </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container -->
-    </section>
+      </section>
 
-    <!-- Skills -->
-    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-    <section id="services" class="services bg-primary">
-      <div class="container">
-        <div class="row text-center">
-          <div class="col-lg-10 col-lg-offset-1">
-            <h2>My Skills</h2>
-            <hr class="small">
-            <div class="row">
-              <div class="col-md-3 col-sm-6">
-                <div class="service-item">
-                  <span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-cloud fa-stack-1x text-primary"></i>
-                  </span>
-                  <h4>
-                    <strong>JS, C# &amp; PHP</strong>
-                  </h4>
-                  <p>Servers need to do powerful things, and I can make them do those things on a bunch of different platforms. JavaScript, .NET and PHP cover the vast majority of what's in use by real companies, and I know scalable and maintainable ways to use them.</p>
-                </div>
+      <section id="skills" class="section section--surface" aria-labelledby="skills-heading">
+        <!-- Enhanced by js/carousel.js. Without JS the viewport is a plain scroll-snap row. -->
+        <div class="carousel" role="group" aria-roledescription="carousel" aria-label="Skills">
+          <h2 id="skills-heading" class="section__title carousel__title">My Skills</h2>
+          <button
+            class="carousel__button carousel__prev"
+            type="button"
+            aria-label="Previous skill"
+            hidden
+          >
+            <svg class="icon" aria-hidden="true"><use href="#i-chevron-left" /></svg>
+          </button>
+          <div class="carousel__viewport">
+            <div class="carousel__track">
+              <div class="carousel__slide" role="group" aria-roledescription="slide">
+                <article class="card skill">
+                  <svg class="icon skill__icon" aria-hidden="true"><use href="#i-code" /></svg>
+                  <h3>Languages</h3>
+                  <p>
+                    TypeScript and C# are where I've shipped the most. I've also made production
+                    contributions to Rust services, and worked in PHP, Ruby, and Java along the way.
+                  </p>
+                  <ul class="tags" aria-label="Languages">
+                    <li>TypeScript</li>
+                    <li>JavaScript</li>
+                    <li>C#</li>
+                    <li>PHP</li>
+                    <li>Ruby</li>
+                    <li>Rust</li>
+                    <li>Java</li>
+                  </ul>
+                </article>
               </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="service-item">
-                  <span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-building-o fa-stack-1x text-primary"></i>
-                  </span>
-                  <h4>
-                    <strong>Frameworks & Libraries</strong>
-                  </h4>
-                  <p>React, Redux, NodeJS. Applications are complex, and have powerful frameworks &amp; libraries to help do a lot of that work. Why re-invent the wheel when there are packages available for use. I know how to leverage and use them in a safe and secure way to speed up development time.</p>
-                </div>
+              <div class="carousel__slide" role="group" aria-roledescription="slide">
+                <article class="card skill">
+                  <svg class="icon skill__icon" aria-hidden="true"><use href="#i-component" /></svg>
+                  <h3>Frontend</h3>
+                  <p>
+                    TypeScript is home base. Shipped React and Angular in production, tuned
+                    performance down to the repaint, and moved from Figma to deployment without
+                    losing fidelity. Framework matters less than the trade-off.
+                  </p>
+                  <ul class="tags" aria-label="Frontend">
+                    <li>Angular</li>
+                    <li>React</li>
+                    <li>Next.js</li>
+                    <li>Redux</li>
+                    <li>RxJS</li>
+                    <li>Flux</li>
+                    <li>PWA</li>
+                  </ul>
+                </article>
               </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="service-item">
-                  <span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-comments fa-stack-1x text-primary"></i>
-                  </span>
-                  <h4>
-                    <strong>Communication</strong>
-                  </h4>
-                  <p>High bandwidth communication and maximizing processes around information sharing is a must for any team AND individual. I know that collaborating with team mates, stakeholders and users is paramount to creating and maintaining world-class software.</p>
-                </div>
+              <div class="carousel__slide" role="group" aria-roledescription="slide">
+                <article class="card skill">
+                  <svg class="icon skill__icon" aria-hidden="true"><use href="#i-server" /></svg>
+                  <h3>Backend</h3>
+                  <p>
+                    Greenfield fullstack for ten years, frontend-focused for the last six, and the
+                    utility infielder who picked up Rails at Fieldwire when the team needed someone
+                    to ship. Stack is secondary to getting work across the finish line.
+                  </p>
+                  <ul class="tags" aria-label="Backend">
+                    <li>.NET Core</li>
+                    <li>Node.JS</li>
+                    <li>Ruby on Rails</li>
+                    <li>Entity Framework</li>
+                    <li>SQL Server</li>
+                    <li>MySQL</li>
+                    <li>MariaDB</li>
+                    <li>Postgres</li>
+                  </ul>
+                </article>
               </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="service-item">
-                  <span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-exchange fa-stack-1x text-primary"></i>
-                  </span>
-                  <h4>
-                    <strong>Collaboration</strong>
-                  </h4>
-                  <p>I'm confident in what I do well, but I am smart enough to know when I won't do so well. Which is why I rely on the people around me to make the software I create & maintain even better.  John C. Maxwell said, "Team work makes the dream work" and it's the truth!</p>
-                </div>
+              <div class="carousel__slide" role="group" aria-roledescription="slide">
+                <article class="card skill">
+                  <svg class="icon skill__icon" aria-hidden="true"><use href="#i-cloud-cog" /></svg>
+                  <h3>Cloud & Infrastructure</h3>
+                  <p>
+                    I've worked across AWS, Azure, and GCP, plus a half-dozen CI systems that
+                    changed with the team. I've studied the architecture patterns, and I know what
+                    works when things are under pressure. My value is reading the setup, making the
+                    right call, and shipping through it.
+                  </p>
+                  <ul class="tags" aria-label="Cloud and Infrastructure">
+                    <li>AWS</li>
+                    <li>Azure</li>
+                    <li>GCP</li>
+                    <li>Docker</li>
+                    <li>Jenkins</li>
+                    <li>Bamboo</li>
+                    <li>CircleCI</li>
+                    <li>GitHub Actions</li>
+                    <li>Grafana</li>
+                    <li>Splunk</li>
+                    <li>Sentry</li>
+                    <li>Split.IO</li>
+                    <li>Mixpanel</li>
+                  </ul>
+                </article>
+              </div>
+              <div class="carousel__slide" role="group" aria-roledescription="slide">
+                <article class="card skill">
+                  <svg class="icon skill__icon" aria-hidden="true">
+                    <use href="#i-flask-conical" />
+                  </svg>
+                  <h3>Testing</h3>
+                  <p>
+                    Playwright for the user journey. Unit tests across the frontend and backend —
+                    Jest, Jasmine, RSpec, NUnit. I write tests I'd want someone else to maintain
+                    when the bug report arrives.
+                  </p>
+                  <ul class="tags" aria-label="Testing">
+                    <li>Playwright</li>
+                    <li>Jasmine</li>
+                    <li>Jest</li>
+                    <li>Karma</li>
+                    <li>RSpec</li>
+                    <li>PHPUnit</li>
+                    <li>NUnit</li>
+                  </ul>
+                </article>
+              </div>
+              <div class="carousel__slide" role="group" aria-roledescription="slide">
+                <article class="card skill">
+                  <svg class="icon skill__icon" aria-hidden="true">
+                    <use href="#i-heart-handshake" />
+                  </svg>
+                  <h3>How I Work</h3>
+                  <p>
+                    Sixteen years taught me what I can't do alone. Accessible by default, documented
+                    for humans, and improved through the people I work with.
+                  </p>
+                  <ul class="tags" aria-label="How I work">
+                    <li>Claude Code</li>
+                    <li>GitHub Copilot</li>
+                    <li>Agile</li>
+                    <li>documentation</li>
+                    <li>a11y</li>
+                    <li>mentorship</li>
+                    <li>collaborative</li>
+                  </ul>
+                </article>
               </div>
             </div>
-            <!-- /.row (nested) -->
           </div>
-          <!-- /.col-lg-10 -->
+          <button
+            class="carousel__button carousel__next"
+            type="button"
+            aria-label="Next skill"
+            hidden
+          >
+            <svg class="icon" aria-hidden="true"><use href="#i-chevron-right" /></svg>
+          </button>
+          <div class="carousel__status" hidden>
+            <button class="carousel__toggle" type="button" aria-label="Pause automatic rotation">
+              <svg class="icon" aria-hidden="true"><use href="#i-pause" /></svg>
+            </button>
+            <span class="carousel__progress" aria-hidden="true"><span></span></span>
+            <span class="carousel__count"></span>
+          </div>
         </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container -->
-    </section>
+      </section>
 
-    <!-- Callout -->
-    <aside class="callout quote">
-      <div class="text-vertical-center">
-        <h1><i class="fa fa-quote-left"></i> All the world is my school, and all humanity is my teacher. <i class="fa fa-quote-right"></i></h1>
-        <h2>George Whitman</h2>
-      </div>
-    </aside>
+      <figure class="quote">
+        <blockquote>
+          <p>All the world is my school, and all humanity is my teacher.</p>
+        </blockquote>
+        <figcaption>George Whitman</figcaption>
+      </figure>
 
-    <!-- Portfolio -->
-    <section id="portfolio" class="portfolio">
+      <section id="portfolio" class="section" aria-labelledby="portfolio-heading">
+        <div class="container">
+          <h2 id="portfolio-heading" class="section__title">My Work</h2>
+          <div class="grid grid--projects">
+            <article class="card project">
+              <img
+                src="img/hootdraft.webp"
+                width="500"
+                height="333"
+                loading="lazy"
+                alt="Hoot Draft: Offline Fantasy drafting tool"
+              />
+              <div class="project__body">
+                <h3>Hoot Draft</h3>
+                <p>
+                  Hoot Draft (formerly PHP Draft) is an open-source fantasy sports draft tool built
+                  for SaaS deployment. It lets league commissioners run offline drafts in a
+                  presenter-style mode, independent of the in-season platform they use.
+                </p>
+                <p>
+                  Currently migrating the backend from Silex to Symfony's micro-kernel, followed by
+                  a modern Angular upgrade. The production server is intentionally offline during
+                  the transition.<!-- Check the live site at <a href="https://www.hootdraft.com" target="_blank" rel="noopener"
+                    >hootdraft.com</a
+                  > or -->
+                  Review the source at
+                  <a href="https://github.com/mattheworres/hootdraft" target="_blank" rel="noopener"
+                    >Github</a
+                  >.
+                </p>
+              </div>
+            </article>
+            <article class="card project">
+              <img
+                src="img/comparehare.webp"
+                width="500"
+                height="333"
+                loading="lazy"
+                alt="CompareHare: price comparison &amp; notification app"
+              />
+              <div class="project__body">
+                <h3>CompareHare</h3>
+                <p>
+                  CompareHare is a price-tracking app I built for myself. It watches the utility
+                  rates and products I care about, and pings me when something crosses the threshold
+                  I've set — originally for electric and gas, expanded to large home appliances in
+                  2022.
+                </p>
+                <p>
+                  I'm currently rewriting the backend in Rust. Not as an exercise, but because I
+                  wanted a real system to learn on: scheduled jobs, scrapers, preference matching,
+                  and data I actually rely on. The commit history is the point.
+                </p>
+              </div>
+            </article>
+            <article class="card project">
+              <img
+                src="img/server.webp"
+                width="500"
+                height="333"
+                loading="lazy"
+                alt="Home Lab: where I tinker and build"
+              />
+              <div class="project__body">
+                <h3>Home Lab</h3>
+                <p>
+                  I built this as both a development sandbox and family infrastructure. It runs
+                  Unraid behind my firewall to host Docker containers for CI (Jenkins), databases
+                  (MariaDB, Postgres), and web services (Nginx, MQTT, Redis).
+                </p>
+                <p>
+                  On the personal side: a Plex media server, Home Assistant, recipe storage, and
+                  Frigate with machine learning tied to security cameras that alert when the mail
+                  arrives or someone's on the porch. I test stacks here before anything touches
+                  production.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <aside class="cta" aria-labelledby="cta-heading">
+        <div class="container">
+          <h2 id="cta-heading">I appreciate your interest to learn more about me and my work!</h2>
+          <p>
+            I am actively looking for new opportunities, so please reach out using my contact
+            information below. Thanks!
+          </p>
+        </div>
+      </aside>
+    </main>
+
+    <footer id="contact" class="footer">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-10 col-lg-offset-1 text-center">
-            <h2>My Work</h2>
-            <hr class="small">
-            <div class="row item row-visible item-1" data-index="1">
-                <div class="col-md-12">
-                    <img class="img-portfolio img-responsive" src="img/hootdraft.png"
-                        alt="Hoot Draft: Offline Fantasy drafting tool">
-                    <h3 class="project-header">Hoot Draft</h3>
-                    <p class="project-desc">
-                        Hoot Draft (formerly PHP Draft) is an open source app written with SAAS deployment in mind that helps Fantasy Sports
-                        leagues run "offline" drafts (off-platform from the service they use in-season) in a "presenter" style mode.
-                    </p>
-                    <p class="project-desc">
-                        Sign up for a commissioner account at <a href="https://www.hootdraft.com" target="_blank">hootdraft.com</a> or <a href="https://github.com/mattheworres/hootdraft" target="_blank">check out the source code</a>!
-                    </p>
-                </div>
-            </div>
-            <div class="row item row-hidden item-2" data-index="2">
-                <div class="col-md-12">
-                    <img class="img-portfolio img-responsive" src="img/comparehare.png"
-                        alt="CompareHare: price comparison & notification app">
-                    <h3 class="project-header">CompareHare</h3>
-                    <p class="project-desc">
-                        CompareHare is a (unreleased) price comparison and alert app that periodically gathers the latest pricing data on
-                        products or services the user indicated preferences for, and automatically notifies them of what they consider a good
-                        deal.
-                    </p>
-                    <p class="project-desc">
-                        Originally written for electric and gas utility prices, it was expanded to also include retail items like large home
-                        appliances in 2022.
-                    </p>
-                    <p class="project-desc">
-                        Source is private, but I would be happy to discuss a variety of details about this project with you!
-                    </p>
-                </div>
-            </div>
-            <div class="row item row-hidden item-3" data-index="3">
-                <div class="col-md-12">
-                    <img class="img-portfolio img-responsive" src="img/server.png"
-                        alt="Home Lab: where I tinker and build">
-                    <h3 class="project-header">Home Lab</h3>
-                    <p class="project-desc">
-                        Not just one project, but several! My home lab enables me to quickly and easily spin up new instances of any tech
-                        stack I'd like to tinker with or use for projects.
-                    </p>
-                    <p class="project-desc">
-                        The current server runs on Unraid, and deploys a variety of Docker containers, including Jenkins for CI, Nginx for web
-                        serving, and any other containers I choose to spin up to run software (MariaDB, .NET hosting, and more!).
-                    </p>
-                    <p class="project-desc">
-                        The entire instance is private and secure, but I will gladly discuss any element of this project and how it pertains to
-                        me as a software developer!
-                    </p>
-                </div>
-            </div>
-            <button class="next-button btn btn-dark btn-lg">Next project<i class="fa fa-chevron-right fa-fw fa-1x"></i></button>
-          </div>
-        </div>
+        <p class="footer__name">Matthew Orres</p>
+        <ul class="footer__links">
+          <li>
+            <a href="mailto:matthew.orres+isthisspam@gmail.com" aria-label="Email">
+              <svg class="icon" aria-hidden="true"><use href="#i-mail" /></svg>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/mattheworres"
+              target="_blank"
+              rel="noopener"
+              aria-label="GitHub"
+            >
+              <svg class="icon icon--solid" aria-hidden="true"><use href="#i-github" /></svg>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/matthew-orres-8a86a41a"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+            >
+              <svg class="icon icon--solid" aria-hidden="true"><use href="#i-linkedin" /></svg>
+            </a>
+          </li>
+        </ul>
+        <p>Copyright &copy; Matthew Orres 2016&mdash;<span id="currentYear">2026</span></p>
       </div>
-    </section>
-
-    <!-- Call to Action -->
-    <aside class="call-to-action bg-primary">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h3>I appreciate your interest to learn more about me and my work!</h3>
-            <p>I am actively looking for new opportunities, so please reach out using my contact information below. Thanks!</p>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Footer -->
-    <footer>
-      <div id="contact" class="container">
-        <div class="row">
-          <div class="col-lg-10 col-lg-offset-1 text-center">
-            <h4><strong>Matthew Orres</strong></h4>
-            <br />
-            <ul class="list-inline">
-              <li>
-                <a href="mailto:matthew.orres+isthisspam@gmail.com"><i class="fa fa-envelope fa-fw fa-3x"></i></a>
-              </li>
-              <li>
-                <a href="https://github.com/mattheworres" target="_blank"><i class="fa fa-github fa-fw fa-3x"></i></a>
-              </li>
-              <li>
-                <a rel="me" href="https://fosstodon.org/@mattygabe" target="_blank"><i class="fa fa-at fa-fw fa-3x"></i></a>
-              </li>
-              <li>
-                <a href="https://www.linkedin.com/in/matthew-orres-8a86a41a" target="_blank"><i class="fa fa-linkedin fa-fw fa-3x"></i></a>
-              </li>
-            </ul>
-            <hr class="small" />
-            <p>Copyright &copy; Matthew Orres 2016&mdash;<span id="currentYear">2024</span></p>
-            <p>Much love and thanks to <a href="http://deathtothestockphoto.com/">Death to the Stock Photo</a> for the incredible layout and awesome stock photos every month. You guys rock!</p>
-          </div>
-        </div>
-      </div>
-      <button id="to-top" href="#top" onclick="location.href='#top';" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></button>
     </footer>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script>
-      var currentYear = new Date().getFullYear();
-      if (currentYear > 2023) {
-        $("#currentYear").text(currentYear);
-      }
-
-      $('button.next-button').click(function(e) {
-        var currentElement = $('.row.row-visible'),
-            currentIndex = parseInt(currentElement.data('index'), 10),
-            visibleClass = 'row-visible',
-            hiddenClass = 'row-hidden';
-
-        var nextIndex = currentIndex === 3 ? 1 : currentIndex + 1;
-        var nextElement = $('.row.item-' + nextIndex);
-
-        currentElement.addClass(hiddenClass).removeClass(visibleClass);
-        nextElement.addClass(visibleClass).removeClass(hiddenClass);
-      });
-
-
-      // Closes the sidebar menu
-      $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-      });
-
-      // Opens the sidebar menu
-      $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-      });
-
-      // Scrolls to the selected menu item on the page
-      $(function() {
-        $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function() {
-          if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-            var target = $(this.hash);
-            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-            if (target.length) {
-              $('html,body').animate({
-                scrollTop: target.offset().top
-              }, 1000);
-              return false;
-            }
-          }
-        });
-      });
-
-      //#to-top button appears after scrolling
-      var fixed = false;
-      $(document).scroll(function() {
-        if ($(this).scrollTop() > 250) {
-          if (!fixed) {
-            fixed = true;
-                  // $('#to-top').css({position:'fixed', display:'block'});
-                  $('#to-top').show("slow", function() {
-                    $('#to-top').css({
-                      position: 'fixed',
-                      display: 'block'
-                    });
-                  });
-                }
-              } else {
-                if (fixed) {
-                  fixed = false;
-                  $('#to-top').hide("slow", function() {
-                    $('#to-top').css({
-                      display: 'none'
-                    });
-                  });
-                }
-              }
-            });
-
-      // Disable Google Maps scrolling
-      // See http://stackoverflow.com/a/25904582/1607849
-      // Disable scroll zooming and bind back the click event
-      var onMapMouseleaveHandler = function(event) {
-        var that = $(this);
-        that.on('click', onMapClickHandler);
-        that.off('mouseleave', onMapMouseleaveHandler);
-        that.find('iframe').css("pointer-events", "none");
-      };
-
-      var onMapClickHandler = function(event) {
-        var that = $(this);
-        // Disable the click handler until the user leaves the map area
-        that.off('click', onMapClickHandler);
-
-        // Enable scrolling zoom
-        that.find('iframe').css("pointer-events", "auto");
-
-        // Handle the mouse leave event
-        that.on('mouseleave', onMapMouseleaveHandler);
-      }
-
-      // Enable map zooming with mouse scroll when the user clicks the map
-      $('.map').on('click', onMapClickHandler);
-    </script>
+    <a class="to-top" href="#title" aria-label="Back to top">
+      <svg class="icon" aria-hidden="true"><use href="#i-chevron-up" /></svg>
+    </a>
   </body>
 </html>
